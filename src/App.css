@@ -12,8 +12,6 @@
 
 .container-content {
   display: flex;
-  position: relative;
-  top: 15vh;
   justify-content: center;
 
 }
@@ -34,7 +32,7 @@
 }
 
 .add-contents > * {
-  margin: 0.5em 0;
+  margin: 0.25em 0;
 
 }
 
@@ -42,6 +40,7 @@
   align-self: center;
   width: 75%;
   padding: 1em;
+  margin: 1em 0;
   font-size: 1.5em;
   font-weight: bold;
   border: 0;
@@ -53,8 +52,8 @@
 /* Contact List Styling */
 .contact-container {
   background-color: #fff;
-  margin: 2em;
-  padding: 2em;
+  margin: 1.5em;
+  padding: 1.5em;
   border-radius: 5px;
 }
 
@@ -71,7 +70,6 @@
 }
 
 .contact-list span {
-  
   display: inline-block;
   float: right;
   margin: 0 0 0 0.5em;
@@ -81,12 +79,16 @@
   display: inline;
 }
 
+.contact-list a {
+  align-self: center;
+  width: 75%;
+}
+
 .link {
   margin-top: 0.5em;
-  align-self: center;
   width: 100%;
   padding: 1em;
-  font-size: 1em;
+  font-size: 0.75em;
   font-weight: bold;
   border: 0;
   background-color: #24a4bd;
@@ -117,7 +119,7 @@ input {
 
 
 p, span {
-  font-size: 2em;
+  font-size: 1.5em;
   text-align: center;
 }
 
@@ -237,9 +239,11 @@ button {
   .container-content {
     display: block;
     margin: 0 1.5em;
-    top: 0;
   }
 
+  .link {
+    font-size: 1em;
+  }
 }
 
 @media screen and (max-width: 425px) {
