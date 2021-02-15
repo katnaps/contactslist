@@ -22,6 +22,7 @@ const ContactContextProvider = (props) => {
 
     }, [contacts.id]);
 
+
     return (
         <ContactContext.Provider value={{ contacts, dispatch }}>
             {props.children}

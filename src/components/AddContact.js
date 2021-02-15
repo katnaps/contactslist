@@ -2,61 +2,81 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { ContactContext } from '../contexts/ContactContext';
 
-const AddContact= () => {
+const AddContact = () => {
     const { dispatch } = useContext(ContactContext);
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
 
     const [alert, setAlert] = useState('')
-    const [alertNo, setAlertNo] = useState('')
 
     const handleSubmit = e => {
         e.preventDefault();
 
         let inputName = document.querySelector('.new-name');
         let inputNumber = document.querySelector('.new-number');
+        let alert = document.querySelector('.alert');
 
 
-        if (number === '' && name === '') {
+        if (name === '') {
+            inputName.classList.add('alert-red');
+
             inputName.placeholder = "Please input name";
+        } else if (number === '') {
+            inputNumber.classList.add('alert-red');
+
             inputNumber.placeholder = "Please input number";
-        } else if (number.length > 12) {
+        } else if (number.length >= 11) {
             setTimeout(() => {
-                setAlertNo('Must be smaller than 10 digits')
+                inputNumber.classList.add('alert-red');
+
+                inputNumber.placeholder = 'Must be smaller than 10 digits';
             })
 
-            setTimeout(() => {
-                setAlertNo('')
-            }, 3000)
-        } else if (name.length >= 3 && number.length < 11) {
+            setNumber('');
+
+        } else if (name.length >= 3 && number !== '') {
             axios.post('https://contactsbookapi.herokuapp.com/api/contacts', {
                 name,
                 number
             })
-            .then(response => {
-                dispatch({
-                    type: 'FETCH_SUCCESS', payload: response.data
+                .then(response => {
+                    dispatch({
+                        type: 'FETCH_SUCCESS', payload: response.data
+                    })
+
+                    setTimeout(() => {
+                        alert.classList.remove('alert-red')
+                        setAlert('Successfully Updated!')
+                    })
+
+                    setTimeout(() => {
+                        setAlert('')
+                    }, 3000)
+
                 })
-            })
+                .then(() => {
+                    inputName.classList.remove('alert-red');
+                    inputNumber.classList.remove('alert-red');
+                    inputNumber.placeholder = 'phone number';
 
-            setName('');
-            setNumber('');
+                    setName('');
+                    setNumber('');
+                })
 
+        } else {
             setTimeout(() => {
-                setAlert('Successfully Updated!')
+                alert.classList.remove('alert-text')
+                alert.classList.add('alert-red')
+
+                inputName.placeholder = "Must be more than 3 letters";
+
             })
 
             setTimeout(() => {
                 setAlert('')
-            }, 3000)
-        } else {
-            setTimeout(() => {
-                setAlertNo('Input name more than 3 and number less than 11')
-            })
-
-            setTimeout(() => {
-                setAlertNo('')
-            }, 3000)
+            }, 5000)
+            setName('');
+            setNumber('');
         }
     }
 
@@ -72,12 +92,11 @@ const AddContact= () => {
         <div className="add-container">
             <h3>Add New Contact</h3>
             <p id="alert" className="alert-text">{alert}</p>
-            <p id="alert" className="alert-number">{alertNo}</p>
             <form onSubmit={handleSubmit}>
                 <div className="add-contents">
                     <label>Name:</label>
                     <input
-                        className="new-name"
+                        className="new-name alert"
                         type="text"
                         placeholder="name"
                         value={name}
@@ -87,7 +106,7 @@ const AddContact= () => {
                     <label>Number</label>
 
                     <input
-                        className="new-number"
+                        className="new-number alert"
                         type="number"
                         placeholder="phone number"
                         value={number}

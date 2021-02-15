@@ -102,6 +102,7 @@ h3 {
   text-align: center;
   padding: 0;
   font-size: 3em;
+  margin: 1em 0 0 0;
 }
 
 ul {
@@ -113,6 +114,7 @@ input {
   padding: 0.75em;
   font-size: 1.5em;
 }
+
 
 p, span {
   font-size: 2em;
@@ -184,18 +186,24 @@ button {
 
 #alert {
   font-size: 1em;
+  margin: 1.5em 0 1em 0;
 }
 
 .alert-text {
-  color: #49d408;
+  color: #1bc248;
   animation-name: alert-text;
   animation-duration: 5s;
 }
 
-.alert-number {
-  color: red;
+.alert-red {
+  color: #c41818;
   animation-name: alert-text;
-  animation-duration: 5s;
+  animation-duration: 3s;
+}
+
+.alert-red::placeholder {
+  color: #c41818;
+
 }
 
 @keyframes alert-text {

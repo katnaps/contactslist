@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 const ContactsList = () => {
     const { contacts } = useContext(ContactContext);
 
-    console.log(contacts)
-
     return contacts.length ? (
         <div className="contact-container">
             <h3>Contact List</h3>
@@ -23,11 +21,9 @@ const ContactsList = () => {
                                 <p>Number:</p>
                                 <span id="phone">{contact.number}</span>
                             </div>
-                            <button
-                                className="link"
-                            >
-                                <Link to={`/contacts/${contact.id}`}>Update</Link>
-                            </button>
+                            <Link to={`/contacts/${contact.id}`}>
+                            <button className="link">Update</button>
+                            </Link>
                         </li>
 
                     )
