@@ -1,9 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { ContactContext } from '../contexts/ContactContext';
 
-export default () => {
-    const { updateState, dispatch, contacts } = useContext(ContactContext);
+const AddContact= () => {
+    const { dispatch } = useContext(ContactContext);
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
 
@@ -28,7 +28,7 @@ export default () => {
             setTimeout(() => {
                 setAlertNo('')
             }, 3000)
-        } else if (name.length < 10 && number.length < 11) {
+        } else if (name.length >= 3 && number.length < 11) {
             axios.post('https://contactsbookapi.herokuapp.com/api/contacts', {
                 name,
                 number
@@ -49,7 +49,14 @@ export default () => {
             setTimeout(() => {
                 setAlert('')
             }, 3000)
+        } else {
+            setTimeout(() => {
+                setAlertNo('Input name more than 3 and number less than 11')
+            })
 
+            setTimeout(() => {
+                setAlertNo('')
+            }, 3000)
         }
     }
 
@@ -89,7 +96,6 @@ export default () => {
 
                     <button
                         className="btn"
-                        onClick={updateState}
                         type="submit">Add Contact
                         </button>
                 </div>
@@ -97,3 +103,5 @@ export default () => {
         </div>
     )
 }
+
+export default AddContact;

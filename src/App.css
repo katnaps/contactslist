@@ -13,7 +13,7 @@
 .container-content {
   display: flex;
   position: relative;
-  top: 25vh;
+  top: 15vh;
   justify-content: center;
 
 }
@@ -26,7 +26,6 @@
   padding: 1.5em;
   flex-direction: column;
   justify-content: center;
-  /* flex-grow: 1; */
 }
 
 .add-contents {
@@ -43,7 +42,7 @@
   align-self: center;
   width: 75%;
   padding: 1em;
-  font-size: 1em;
+  font-size: 1.5em;
   font-weight: bold;
   border: 0;
   background-color: #3e9688;
@@ -54,10 +53,9 @@
 /* Contact List Styling */
 .contact-container {
   background-color: #fff;
-  margin: 1.5em;
-  padding: 1.5em;
+  margin: 2em;
+  padding: 2em;
   border-radius: 5px;
-  /* flex-grow: 1; */
 }
 
 
@@ -67,19 +65,14 @@
   margin: 0.5em 0;
 }
 
-
-.contact-list button {
-  /* margin-left: 3em; */
-}
-
 .contact-list-header {
   display: flex;
   justify-content: space-between;
 }
 
 .contact-list span {
+  
   display: inline-block;
-  font-size: 1.2em;
   float: right;
   margin: 0 0 0 0.5em;
 }
@@ -92,7 +85,7 @@
   margin-top: 0.5em;
   align-self: center;
   width: 100%;
-  padding: 0.5em;
+  padding: 1em;
   font-size: 1em;
   font-weight: bold;
   border: 0;
@@ -107,6 +100,8 @@
 
 h3 {
   text-align: center;
+  padding: 0;
+  font-size: 3em;
 }
 
 ul {
@@ -116,11 +111,29 @@ ul {
 
 input {
   padding: 0.75em;
+  font-size: 1.5em;
 }
 
-p {
-  font-size: 1.2em;
+p, span {
+  font-size: 2em;
   text-align: center;
+}
+
+
+li {
+  list-style: none;
+}
+
+label {
+  font-size: 2em;
+}
+
+a {
+  font-size: 1.5em
+}
+
+button {
+  border-radius: 5px;
 }
 
 /* Details Contact Styling */
@@ -148,6 +161,7 @@ p {
 }
 
 .link-back {
+  margin-top: 0.5em;
   align-self: center;
   width: 100%;
   padding: 0.75em;
@@ -157,6 +171,12 @@ p {
   background-color: #24a4bd;
   color: #fff;
 }
+
+.link-back a:visited, .link-back a:link, .del-contacts a:link, .del-contacts a:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
 
 .details-container p {
   margin: 0;
@@ -190,4 +210,79 @@ p {
   100% {
     opacity: 0;
   }
+}
+
+.del-contacts {
+  align-self: center;
+  width: 100%;
+  padding: 0.75em;
+  font-size: 1em;
+  font-weight: bold;
+  border: 0;
+  background-color: #dd0e07;
+  color: #fff;
+}
+
+
+/* Media Query */
+@media screen and (max-width: 768px) {
+  .container-content {
+    display: block;
+    margin: 0 1.5em;
+    top: 0;
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+  
+  h3 {
+    font-size: 1.5em;
+  }
+
+  p, span {
+    font-size: 1.1em;
+  }
+
+  label {
+    font-size: 1em;
+  }
+  
+  a {
+    font-size: 1em
+  }
+
+  input {
+    font-size: 1em;
+  }
+
+  form {
+    padding: 0;
+    margin: 0;
+  }
+
+  input {
+    padding: 0.5em 0.5em;
+    width: 100%;
+  }
+
+  .btn {
+    font-size: 1em;
+  }
+
+  .add-container {
+    margin: 1.5em 0;
+    padding: 1.5em 1.5em;
+  }
+
+  .contact-container {
+    margin: 1.5em 0;
+    padding: 1.5em 1.5em;
+  }
+
+  .details-container {
+    margin: 1.5em 0;
+    padding: 1.5em 1.5em;
+  }
+
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useState } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
 import { ContactReducer } from '../reducer/ContactReducer';
 
@@ -9,8 +9,7 @@ const ContactContextProvider = (props) => {
         const localData = localStorage.getItem('contacts');
         return localData ? JSON.parse(localData) : [];
     });
-    const [info, setInfo] = useState(true);
-    const [count, setCount] = useState(0)
+
 
     useEffect(() => {
         axios.get('https://contactsbookapi.herokuapp.com/api/contacts')
@@ -19,19 +18,12 @@ const ContactContextProvider = (props) => {
                     type: 'FETCH_SUCCESS', payload: response.data
                 })
             })
-            localStorage.setItem('contacts', JSON.stringify(contacts));
-            let countCopy = 0
-            countCopy = count + 1;
-            setCount(count)
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+
     }, [contacts.id]);
 
-    console.log(contacts)
-    const updateState = () => {
-        setInfo(!true);
-    }
-
     return (
-        <ContactContext.Provider value={{ info, contacts, dispatch, updateState }}>
+        <ContactContext.Provider value={{ contacts, dispatch }}>
             {props.children}
         </ContactContext.Provider>
     )

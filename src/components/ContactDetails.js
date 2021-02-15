@@ -4,9 +4,9 @@ import { ContactContext } from '../contexts/ContactContext';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-export default () => {
+const ContactDetails = () => {
     const { id } = useParams();
-    const { updateState, dispatch  } = useContext(ContactContext);
+    const { dispatch } = useContext(ContactContext);
     const [contact, setContact] = useState([])
 
     const [name, setName] = useState('')
@@ -21,15 +21,15 @@ export default () => {
                 // console.log(response.data)
                 setContact(response.data)
             })
-    }, [])
+    }, [id])
 
     const removeContacts = () => {
         axios.delete(`https://contactsbookapi.herokuapp.com/api/contacts/${id}`)
-        .then(response => {
-            dispatch({
-                type: 'FETCH_SUCCESS', payload: response.data
+            .then(response => {
+                dispatch({
+                    type: 'FETCH_SUCCESS', payload: response.data
+                })
             })
-        })
     }
 
     const handleNameInput = e => {
@@ -44,7 +44,7 @@ export default () => {
         let inputName = document.getElementById('input-name');
         let inputNumber = document.getElementById('input-number');
 
-        
+
         if (number === '' && name === '') {
             inputName.placeholder = "Please input name";
             inputNumber.placeholder = "Please input number";
@@ -56,23 +56,26 @@ export default () => {
             setTimeout(() => {
                 setAlertNo('')
             }, 3000)
-        } else if ( name.length < 10 && number.length < 11 ) {
+        } else if (name !== '' && number.length < 11) {
             axios.put(`https://contactsbookapi.herokuapp.com/api/contacts/${id}`, {
-            name,
-            number
-        })
-            .then(response => {
-                setName('')
-                setNumber('')
-
-                setTimeout(() => {
-                    setAlert('Successfully Updated!')
-                })
-
-                setTimeout(() => {
-                    setAlert('')
-                }, 3000)
+                name,
+                number
             })
+                .then(response => {
+                    dispatch({
+                        type: 'FETCH_SUCCESS', payload: response.data
+                    })
+                    setName('')
+                    setNumber('')
+
+                    setTimeout(() => {
+                        setAlert('Successfully Updated!')
+                    })
+
+                    setTimeout(() => {
+                        setAlert('')
+                    }, 3000)
+                })
         }
     }
 
@@ -99,9 +102,11 @@ export default () => {
                     onChange={handleNumberInput}
                 />
                 <input onClick={updateInfo} type="submit" value="Update" />
-                <button className="del-name" onClick={removeContacts}><Link to='/'>Delete</Link></button>
-                <button className="link-back" onClick={updateState}><Link to='/'>Back</Link></button>
+                <button className="del-contacts" onClick={removeContacts}><Link to='/'>Delete</Link></button>
+                <button className="link-back"><Link to='/'>Back</Link></button>
             </div>
         </>
     )
 }
+
+export default ContactDetails;

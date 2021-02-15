@@ -1,4 +1,3 @@
-import axios from 'axios';
 
 export const ContactReducer = (state, action) => {
     switch (action.type) {

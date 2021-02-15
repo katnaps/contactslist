@@ -1,20 +1,9 @@
-import React, { useEffect, useContext, useState } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import { ContactContext } from '../contexts/ContactContext';
 import { Link } from 'react-router-dom';
 
-export default () => {
-    const { contacts, dispatch, setInfo, info } = useContext(ContactContext);
-    const [id, setId] = useState()
-
-    const handleRemoveContact = () => {
-        axios.delete(`https://contactsbookapi.herokuapp.com/api/contacts/${id}`)
-            .then(response => {
-                dispatch({
-                    type: 'FETCH_SUCCESS', payload: response.data
-                })
-            })
-    }
+const ContactsList = () => {
+    const { contacts } = useContext(ContactContext);
 
     console.log(contacts)
 
@@ -36,9 +25,7 @@ export default () => {
                             </div>
                             <button
                                 className="link"
-                                onClick={() => {
-                                    setId(contact.id)
-                                }}>
+                            >
                                 <Link to={`/contacts/${contact.id}`}>Update</Link>
                             </button>
                         </li>
@@ -53,3 +40,5 @@ export default () => {
             </div>
         )
 }
+
+export default ContactsList;
