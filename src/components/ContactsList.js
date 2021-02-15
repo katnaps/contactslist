@@ -1,20 +1,22 @@
 import React, { useEffect, useContext, useState } from 'react';
 import axios from 'axios';
 import { ContactContext } from '../contexts/ContactContext';
-import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
-
 
 export default () => {
     const { contacts, dispatch, setInfo, info } = useContext(ContactContext);
-    const history = useHistory()
     const [id, setId] = useState()
 
-    const updateDetails = () => {
-        setInfo(false);
-    }   
+    const handleRemoveContact = () => {
+        axios.delete(`https://contactsbookapi.herokuapp.com/api/contacts/${id}`)
+            .then(response => {
+                dispatch({
+                    type: 'FETCH_SUCCESS', payload: response.data
+                })
+            })
+    }
 
-
+    console.log(contacts)
 
     return contacts.length ? (
         <div className="contact-container">
@@ -24,9 +26,21 @@ export default () => {
                 {contacts.map(contact => {
                     return (
                         <li className="contact-list" key={contact.id}>
-                            <div>Name: {contact.name}</div>
-                            <div>Number: {contact.number}</div>
-                            <button className="link" onClick={() => {setInfo(false); setId(contact.id)}}><Link  to={`/contacts/${contact.id}`}>Update</Link></button>
+                            <div>
+                                <p>Name:</p>
+                                <span>{contact.name}</span>
+                            </div>
+                            <div>
+                                <p>Number:</p>
+                                <span id="phone">{contact.number}</span>
+                            </div>
+                            <button
+                                className="link"
+                                onClick={() => {
+                                    setId(contact.id)
+                                }}>
+                                <Link to={`/contacts/${contact.id}`}>Update</Link>
+                            </button>
                         </li>
 
                     )
@@ -34,6 +48,8 @@ export default () => {
             </ul>
         </div>
     ) : (
-            <div>No contacts in list</div>
+            <div className="contact-container">
+                <h3>No contacts in list</h3>
+            </div>
         )
 }

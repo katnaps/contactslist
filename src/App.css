@@ -31,8 +31,11 @@
 
 .add-contents {
   display: flex;
-
   flex-direction: column;
+}
+
+.add-contents > * {
+  margin: 0.5em 0;
 
 }
 
@@ -61,8 +64,7 @@
 .contact-list {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 1em 0;
+  margin: 0.5em 0;
 }
 
 
@@ -75,14 +77,22 @@
   justify-content: space-between;
 }
 
-.contact-list-header p {
-  margin: 0;
+.contact-list span {
+  display: inline-block;
+  font-size: 1.2em;
+  float: right;
+  margin: 0 0 0 0.5em;
+}
+
+.contact-list p {
+  display: inline;
 }
 
 .link {
+  margin-top: 0.5em;
   align-self: center;
-  width: 75%;
-  padding: 1em;
+  width: 100%;
+  padding: 0.5em;
   font-size: 1em;
   font-weight: bold;
   border: 0;
@@ -105,8 +115,12 @@ ul {
 }
 
 input {
-  padding: 1em;
-  margin: 0.5em;
+  padding: 0.75em;
+}
+
+p {
+  font-size: 1.2em;
+  text-align: center;
 }
 
 /* Details Contact Styling */
@@ -133,6 +147,17 @@ input {
   width: 100%;
 }
 
+.link-back {
+  align-self: center;
+  width: 100%;
+  padding: 0.75em;
+  font-size: 1em;
+  font-weight: bold;
+  border: 0;
+  background-color: #24a4bd;
+  color: #fff;
+}
+
 .details-container p {
   margin: 0;
 }
@@ -143,6 +168,12 @@ input {
 
 .alert-text {
   color: #49d408;
+  animation-name: alert-text;
+  animation-duration: 5s;
+}
+
+.alert-number {
+  color: red;
   animation-name: alert-text;
   animation-duration: 5s;
 }
