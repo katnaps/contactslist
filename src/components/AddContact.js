@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ContactContext } from '../contexts/ContactContext';
 
 const AddContact = () => {
-    const { dispatch } = useContext(ContactContext);
+    const { setContacts } = useContext(ContactContext);
     const [name, setName] = useState('')
     const [number, setNumber] = useState('')
 
@@ -40,9 +40,7 @@ const AddContact = () => {
                 number
             })
                 .then(response => {
-                    dispatch({
-                        type: 'FETCH_SUCCESS', payload: response.data
-                    })
+                    setContacts(response.data);
 
                     setTimeout(() => {
                         alert.classList.remove('alert-red')

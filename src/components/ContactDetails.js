@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const ContactDetails = () => {
     const { id } = useParams();
-    const { dispatch } = useContext(ContactContext);
+    const { contacts, setContacts } = useContext(ContactContext);
     const [contact, setContact] = useState([])
 
     const [name, setName] = useState('')
@@ -19,14 +19,12 @@ const ContactDetails = () => {
             .then(response => {
                 setContact(response.data)
             })
-    }, [id])
+    }, [contacts.name])
 
     const removeContacts = () => {
         axios.delete(`https://contactsbookapi.herokuapp.com/api/contacts/${id}`)
             .then(response => {
-                dispatch({
-                    type: 'FETCH_SUCCESS', payload: response.data
-                })
+                setContacts(response.data)
             })
     }
 
@@ -69,9 +67,7 @@ const ContactDetails = () => {
                 number
             })
                 .then(response => {
-                    dispatch({
-                        type: 'FETCH_SUCCESS', payload: response.data
-                    })
+                    setContacts(response.data);
                     
                     setTimeout(() => {
                         alert.classList.remove('alert-red')
