@@ -17,7 +17,6 @@ const ContactContextProvider = (props) => {
         .then(response => {
             setContacts(response.data)
         })
-        // localStorage.setItem('contacts', JSON.stringify(contacts));
     }, [contacts.id])
 
     console.log(contacts)
